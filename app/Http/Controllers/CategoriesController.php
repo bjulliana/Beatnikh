@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use App\User;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,7 +12,12 @@ use Intervention\Image\Facades\Image;
 class CategoriesController extends Controller {
 
 	public function index() {
+		$categories = Category::with('products')->get();
+		// $categories = Category::pluck('title', 'id');
+		// $categories = Category::select()->join('products', 'categories.id', '=', 'products.category_id')->get();
+		// $products = Product::select()->join('categories', 'products.category_id', '=', 'categories.id')->get();
 
+		return view('categories.show', compact('categories', 'products'));
 	}
 
 	public function validator(array $data) {
@@ -58,10 +65,11 @@ class CategoriesController extends Controller {
 			);
 
 			$category->save();
-			return back()->with('success','Category created successfully!');
+
+			return back()->with('success', 'Category created successfully!');
 		}
 
-		return redirect()->back()->withErrors($validator->errors())->withInput()->with('error','Problem creating category!');
+		return redirect()->back()->withErrors($validator->errors())->withInput()->with('error', 'Problem creating category!');
 	}
 
 	public function show($id) {

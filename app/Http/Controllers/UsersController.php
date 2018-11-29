@@ -48,7 +48,7 @@ class UsersController extends Controller {
 				$user->photo = $filename;
 			}
 			$user->save();
-			
+
 			return view('auth.profile', ['user' => Auth::user()])->with('success', 'Your changes were saved successfully.');
 		}
 
@@ -59,7 +59,7 @@ class UsersController extends Controller {
 		$user = User::find($id);
 		$user->delete();
 
-		return 'deleted';
+		return view('home');
 	}
 
 }

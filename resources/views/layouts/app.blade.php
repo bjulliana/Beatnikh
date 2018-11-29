@@ -63,8 +63,8 @@
 								<li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
 								@guest
 								@else
-									@if ( $user->role == 'admin' )
-										<li class="nav-item"><a class="nav-link" href="{{ route('login') }}">New Category</a></li>
+									@if ( Auth::user()->role == 'admin' )
+										<li class="nav-item"><a class="nav-link" href="{{ route('categories.show') }}">Categories</a></li>
 									@endif
 								@endguest
 								<li class="nav-item ml-auto">
