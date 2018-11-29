@@ -63,7 +63,7 @@
 						<div class="comment-form-wrapper fix">
 							<h3 class="form-title">Send a Message</h3>
 							<form method="post" action="{{ url('/message/add') }}">
-								{{ csrf_field() }}
+								@csrf
 								<div class="comment-form row">
 									<div class="d-none" aria-hidden="true">
 										<input name="product_id" id="product_id" value="{{ $product->id }}">

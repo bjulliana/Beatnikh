@@ -79,11 +79,16 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="photo" id="photo-label" class="col-md-4 col-form-label text-md-right">{{ __('Upload Photo') }}</label>
+								<label for="photo" class="col-md-4 col-form-label text-md-right">{{ __('Upload Photo') }}</label>
 
 								<div class="col-md-6">
-									<input type="file" class="custom-file-input" id="photo" name="photo" aria-describedby="photo-label" value="{{ old('photo') }}">
-									<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+									<input id="photo" type="file" class="form-control{{ $errors->has('photo') ? ' is-invalid' : '' }}" name="photo" value="{{ old('photo') }}" required>
+
+									@if ($errors->has('photo'))
+										<span class="invalid-feedback" role="alert">
+											<strong>{{ $errors->first('photo') }}</strong>
+										</span>
+									@endif
 								</div>
 							</div>
 

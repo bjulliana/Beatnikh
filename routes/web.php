@@ -19,7 +19,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('profile', 'UsersController@show')->middleware('auth')->name('profile.show');
-Route::post('profile', 'UsersController@update')->middleware('auth')->name('profile.update');
+Route::get('profile/edit/{id}', 'UsersController@edit')->middleware('auth')->name('profile.edit');
+Route::post('profile/{id}/update', 'UsersController@update')->middleware('auth')->name('profile.update');
 Route::get('/products/new', 'ProductsController@create');
 Route::post('/products/add', 'ProductsController@store');
 Route::get('/category/new', 'CategoriesController@create');
