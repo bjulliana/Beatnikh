@@ -9,7 +9,7 @@
 								<nav class="category-menu" style="">
 									<ul>
 										@foreach($categories as $category)
-											<li><a href="#">{{ $category->title }}</a></li>
+											<li><a href="#">{{ $category->cat_title }}</a></li>
 										@endforeach
 									</ul>
 								</nav>

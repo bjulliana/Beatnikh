@@ -15,14 +15,14 @@
 							@csrf
 
 							<div class="form-group row">
-								<label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
+								<label for="cat_title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
 
 								<div class="col-md-6">
-									<input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required autofocus>
+									<input id="cat_title" type="text" class="form-control{{ $errors->has('cat_title') ? ' is-invalid' : '' }}" name="cat_title" value="{{ old('cat_title') }}" required autofocus>
 
-									@if ($errors->has('title'))
+									@if ($errors->has('cat_title'))
 										<span class="invalid-feedback" role="alert">
-											<strong>{{ $errors->first('title') }}</strong>
+											<strong>{{ $errors->first('cat_title') }}</strong>
 										</span>
 									@endif
 								</div>

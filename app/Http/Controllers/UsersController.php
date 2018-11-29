@@ -9,16 +9,30 @@ use Intervention\Image\Facades\Image;
 
 class UsersController extends Controller {
 
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function show() {
 		return view('auth.profile', ['user' => Auth::user()]);
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function edit($id) {
 		$user = Auth::user($id);
 
 		return view('auth.edit', compact('user'));
 	}
 
+	/**
+	 * @param \Illuminate\Http\Request $request
+	 * @param                          $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function update(Request $request, $id) {
 
 		$data      = request()->input();
@@ -55,6 +69,11 @@ class UsersController extends Controller {
 		return view('auth.profile', ['user' => Auth::user()])->withErrors($validator->errors())->withInput()->with('error', 'Problem Updating Profile!');
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function destroy($id) {
 		$user = User::find($id);
 		$user->delete();

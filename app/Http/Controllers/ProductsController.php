@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller {
 
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function index() {
 		$products = Product::join('product_images', 'products.id', '=', 'product_images.product_id')->select()->get();
 
@@ -21,12 +24,20 @@ class ProductsController extends Controller {
 		return view('products.all', compact('products'));
 	}
 
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function create() {
-		$categories = Category::pluck('title', 'id');
+		$categories = Category::pluck('cat_title', 'id');
 
 		return view('products.create', compact('categories'));
 	}
 
+	/**
+	 * @param \Illuminate\Http\Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function store(Request $request) {
 
 		$data      = request()->input();
@@ -77,6 +88,11 @@ class ProductsController extends Controller {
 		return redirect()->back()->withErrors($validator->errors())->withInput()->with('error', 'Problem creating product!');
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function show($id) {
 		$product  = Product::with('images', 'user')->find($id);
 		$messages = Message::join('users', 'messages.user_id', '=', 'users.id')

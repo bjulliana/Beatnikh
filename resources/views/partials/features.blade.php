@@ -14,7 +14,7 @@
 					<div class="feature-product">
 						<div class="image">
 							<a href="{{ url('products/show') }}/{{ $product->id }}" tabindex="-1">
-								<img src="/uploads/products/{{ $product->file_name }}" class="img-fluid" alt="">
+								<img src="/uploads/products/{{ $product->images->first()->file_name }}" class="img-fluid" alt="">
 							</a>
 							<a class="hover-icon" href="#" data-toggle="modal" data-target="#quick-view-modal-container" tabindex="-1"><i class="lnr lnr-eye"></i></a>
 							<a class="hover-icon" href="#" tabindex="-1"><i class="lnr lnr-heart"></i></a>
