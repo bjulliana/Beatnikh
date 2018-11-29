@@ -1,0 +1,32 @@
+//Convert value to rem
+@function value-to-rem($value, $base: null) {
+	@if type-of($value) == 'number' {
+		$value: ($value / 16) * 1rem;
+	}
+	@if $value == 0rem {
+		$value: 0;
+	}
+
+	@return $value;
+}
+
+//Rem-calc function
+@function rem-calc($values, $base: null) {
+	@if null == $values {
+		@return null;
+	}
+
+	$rem-values: ();
+	$count: length($values);
+	$base: 16;
+
+	@if $count == 1 {
+		@return value-to-rem($values, $base);
+	}
+
+	@for $i from 1 through $count {
+		$rem-values: append($rem-values, value-to-rem(nth($values, $i), $base));
+	}
+
+	@return $rem-values;
+}
