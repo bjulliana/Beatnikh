@@ -3,6 +3,12 @@
 @section('content')
 
 	<div class="container py-5">
+		<div class="alert mt-4">
+			@include('alerts')
+		</div>
+		<div class="text-right">
+			<a href="{{ route('categories.new') }}" class="btn btn-primary mb-3">New Category</a>
+		</div>
 		<table class="table">
 			<thead class="thead-dark">
 				<tr>
@@ -14,13 +20,14 @@
 			</thead>
 			<tbody>
 
-			@foreach ($categories as $category)
-<pre><?php var_dump($category) ?></pre>
+				@foreach ($categories as $category)
 					<tr>
 						<th>{{ $loop->iteration }}</th>
 						<td>{{ $category->title }}</td>
-						<td>{{ $category->title }}</td>
-						<td><a class="btn btn-primary">Edit</a><a href="" class="btn btn-danger">Delete</a></td>
+						<td><a href="#">{{ $category->products->count() }}</a></td>
+						<td>
+							<a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary mr-3">Edit</a><a href="{{ route('categories.drop', $category->id) }}" class="btn btn-danger" onclick='return confirm("Are you sure?")'>Delete</a>
+						</td>
 					</tr>
 				@endforeach
 			</tbody>

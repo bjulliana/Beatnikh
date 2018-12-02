@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\ProductsImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsImageController extends Controller 
 {
@@ -76,11 +78,12 @@ class ProductsImageController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function destroy($id)
-  {
-    
+  public function destroy($id) {
+	  $image = ProductsImage::find($id);
+	  Storage::delete($image->file_name);
+	  $image->delete();
+
+	  return back();
   }
   
 }
-
-?>

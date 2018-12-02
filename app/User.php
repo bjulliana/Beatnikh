@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Product;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -31,5 +32,10 @@ class User extends Authenticatable implements HasMedia
 			return true;
 		}
 		return false;
+	}
+
+	public function products()
+	{
+		return $this->hasMany('App\Product');
 	}
 }

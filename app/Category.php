@@ -11,13 +11,13 @@ class Category extends Model
     public $timestamps = true;
 
 	protected $fillable = [
-		'cat_title', 'image'
+		'title', 'image'
 	];
 
 
 	public function products()
     {
-        return $this->belongsToMany('App\Product');
+        return $this->hasMany('App\Product');
     }
 
 }

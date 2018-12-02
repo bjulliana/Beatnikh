@@ -58,50 +58,56 @@
 			<div class="row">
 				<div class="col-12 col-lg-12">
 					<div class="main-menu">
-						<nav style="display: block">
-							<ul class="nav py-3">
-								<li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-								@guest
-								@else
-									@if ( Auth::user()->role == 'admin' )
-										<li class="nav-item"><a class="nav-link" href="{{ route('categories.show') }}">Categories</a></li>
-									@endif
-								@endguest
-								<li class="nav-item ml-auto">
-									<ul class="nav header-nav">
-										@guest
-											<li class="nav-item">
-												<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-											</li>
-											<li class="nav-item">
-												@if (Route::has('register'))
-													<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-												@endif
-											</li>
-										@else
-											<li class="nav-item dropdown">
-												<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-													<img src="/uploads/users/{{ Auth::user()->photo }}" style="width:32px; height:32px; margin-right: 10px; border-radius:50%">
-													{{ Auth::user()->name }} <span class="user_img"></span>
-												</a>
+						<nav class="navbar navbar-dark navbar-expand-md">
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="nav-item ml-auto order-1">
+								<ul class="nav header-nav">
+									@guest
+										<li class="nav-item">
+											<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+										</li>
+										<li class="nav-item">
+											@if (Route::has('register'))
+												<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+											@endif
+										</li>
+									@else
+										<li class="nav-item dropdown">
+											<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+												<img src="/uploads/users/{{ Auth::user()->photo }}" style="width:32px; height:32px; margin-right: 10px; border-radius:50%">
+												<span class="d-none d-sm-inline">{{ Auth::user()->name }} </span><span class="user_img"></span>
+											</a>
 
-												<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-													<li><a class="dropdown-item" href="{{ url('/profile') }}">Profile</a></li>
-													<li><a class="dropdown-item" href="{{ route('logout') }}"
-													       onclick="event.preventDefault();
+											<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+												<li><a class="dropdown-item" href="{{ url('/profile') }}">My Account</a></li>
+												<li><a class="dropdown-item" href="{{ route('logout') }}"
+												       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-															{{ __('Logout') }}
-														</a>
-														<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-															@csrf
-														</form>
-													</li>
-												</ul>
-											</li>
-										@endguest
-									</ul>
-								</li>
-							</ul>
+														{{ __('Logout') }}
+													</a>
+													<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+														@csrf
+													</form>
+												</li>
+											</ul>
+										</li>
+									@endguest
+								</ul>
+							</div>
+							<div class="collapse navbar-collapse order-0" id="main-nav">
+								<ul class="navbar-nav py-3">
+									<li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ route('shop') }}">Browse Products</a></li>
+									@guest
+									@else
+										@if ( Auth::user()->role == 'admin' )
+											<li class="nav-item"><a class="nav-link" href="{{ route('categories.show') }}">Manage Categories</a></li>
+										@endif
+									@endguest
+								</ul>
+							</div>
 						</nav>
 					</div>
 				</div>

@@ -16,7 +16,7 @@ class HomeController extends Controller {
 
 	public function index() {
 
-		$categories = Category::select()->get();
+		$categories = Category::with('products')->orderBy('title', 'asc')->get();
 		$products   = Product::with('images')->get();
 
 		return view('home', compact('categories', 'products'));

@@ -9,13 +9,15 @@
 		</div>
 		<div class="row">
 			@foreach($categories as $category)
-				<div class="col-6 col-md-3">
-					<div class="category-banner">
-						<a href="#">
-							<img src="/uploads/categories/{{ $category->image }}" class="img-fluid" alt="">
-						</a>
+				@if ($category->products->count() > 1)
+					<div class="col-6 col-md-3">
+						<div class="category-banner">
+							<a href="#">
+								<img src="/uploads/categories/{{ $category->image }}" class="img-fluid" alt="">
+							</a>
+						</div>
 					</div>
-				</div>
+				@endif
 			@endforeach
 		</div>
 	</div>

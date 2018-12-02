@@ -8,17 +8,17 @@
 		<div class="row justify-content-center py-5">
 			<div class="col-md-8">
 				<div class="card">
-					<div class="card-header">{{ __('Post New Ad') }}</div>
+					<div class="card-header">{{ __('Edit Product') }}</div>
 
 					<div class="card-body">
-						<form method="POST" action="{{ url('products/add') }}" enctype="multipart/form-data">
+						<form method="POST" action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data">
 							@csrf
 
 							<div class="form-group row">
 								<label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Product Title') }}</label>
 
 								<div class="col-md-6">
-									<input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required autofocus>
+									<input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ $product->title }}" required autofocus>
 
 									@if ($errors->has('title'))
 										<span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
 								<label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Product Category') }}</label>
 
 								<div class="col-md-6">
-									<select id="category_id" class="form-control{{ $errors->has('category_id') ? ' is-invalid' : '' }}" name="category_id" value="{{ old('category_id') }}" required autofocus>
+									<select id="category_id" class="form-control{{ $errors->has('category_id') ? ' is-invalid' : '' }}" name="category_id" value="{{ $product->category }}" required autofocus>
 										@foreach($categories as $id => $title)
 											<option value="{{ $id }}">
 												{{ $title }}
@@ -52,7 +52,7 @@
 								<label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
 								<div class="col-md-6">
-									<textarea id="description" rows="4" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" required>{{ old('description') }}</textarea>
+									<textarea id="description" rows="4" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" required>{{ $product->description }}</textarea>
 
 									@if ($errors->has('description'))
 										<span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@
 										<span class="input-group-text">$</span>
 										<span class="input-group-text">0.00</span>
 									</div>
-									<input type="text" id="price" name="price" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" value="{{ old('price') }}" required>
+									<input type="text" id="price" name="price" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" value="{{ $product->price }}" required>
 
 									@if ($errors->has('price'))
 										<span class="invalid-feedback" role="alert">
@@ -84,6 +84,16 @@
 								<label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Product Images') }}</label>
 
 								<div class="col-md-6">
+
+									<div class="row">
+										@foreach($images as $image)
+											<div class="col-4">
+												<img src="/uploads/products/{{ $image->file_name }}">
+												<a href="{{ route('image.drop', $image->id) }}" class="close" aria-label="Close" onclick='return confirm("Are you sure?")'><span aria-hidden="true">&times;</span></a>
+											</div>
+										@endforeach
+									</div>
+
 									<input id="images" type="file" class="form-control{{ $errors->has('images') ? ' is-invalid' : '' }}" name="images[]" value="{{ old('images') }}" required multiple>
 
 									@if ($errors->has('images'))
@@ -93,11 +103,16 @@
 									@endif
 								</div>
 							</div>
-							<div class="form-group row mb-0">
-								<div class="col-md-6 offset-md-4">
+							<div class="form-group row mb-0 justify-content-center">
+								<div class="col-md-3">
 									<button type="submit" class="btn btn-primary">
-										{{ __('Submit Ad') }}
+										{{ __('Update Ad') }}
 									</button>
+								</div>
+								<div class="col-md-3">
+									<a href="{{ route('profile.show').'#products' }}" class="btn btn-danger btn-block">
+										{{ __('Cancel') }}
+									</a>
 								</div>
 							</div>
 						</form>

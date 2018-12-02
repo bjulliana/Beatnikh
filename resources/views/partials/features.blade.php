@@ -10,7 +10,7 @@
 		</div>
 		<div class="row">
 			@foreach($products as $product)
-				<div class="col-6 col-sm-4 col-lg-2">
+				<div class="col-6 col-sm-4 col-lg-3">
 					<div class="feature-product">
 						<div class="image">
 							<a href="{{ url('products/show') }}/{{ $product->id }}" tabindex="-1">
