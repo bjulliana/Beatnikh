@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Storage;
 class ProductsController extends Controller {
 
 	/**
-	 * @param null $category
-	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function index() {
@@ -29,13 +27,20 @@ class ProductsController extends Controller {
 				'category', function ($query) {
 				$query->where('category_id', request()->category);
 			}
-			)->get();
+			)->paginate($pagination);
 		} else {
 			$products = Product::with('category')->paginate($pagination);
-			// $products = $products->paginate($pagination);
+		}
+		
+		if (request()->sort == 'low_high') {
+			$products = Product::with('category')->orderBy('price')->paginate($pagination);
+		} else if (request()->sort == 'high_low') {
+			$products = Product::with('category')->orderBy('price', 'desc')->paginate($pagination);
+		} else {
+			$products = Product::with('category')->paginate($pagination);
 		}
 
-		return view('products.index', compact('products', 'categories'));
+		return view('shop', compact('products', 'categories'));
 	}
 
 	/**
@@ -123,8 +128,8 @@ class ProductsController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id) {
-		$product = Product::find($id);
-		$images = $product->images()->get();
+		$product    = Product::find($id);
+		$images     = $product->images()->get();
 		$categories = Category::pluck('title', 'id');
 
 		return view('products.edit', compact('product', 'categories', 'images'));
@@ -174,12 +179,17 @@ class ProductsController extends Controller {
 				}
 			}
 
-			return redirect(route('profile.show'))->with('success', 'Product Updated successfully!');
+			return redirect(route('profile.show') . '#products')->with('success', 'Product Updated successfully!');
 		}
 
 		return redirect()->back()->withErrors($validator->errors())->withInput()->with('error', 'Problem Updading product!');
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function destroy($id) {
 		$product = Category::find($id);
 		Storage::detele($product->images);

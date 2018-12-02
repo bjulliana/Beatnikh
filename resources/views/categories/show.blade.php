@@ -3,7 +3,7 @@
 @section('content')
 
 	<div class="container py-5">
-		<div class="alert mt-4">
+		<div class="alert">
 			@include('alerts')
 		</div>
 		<div class="text-right">

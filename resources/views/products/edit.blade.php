@@ -94,7 +94,7 @@
 										@endforeach
 									</div>
 
-									<input id="images" type="file" class="form-control{{ $errors->has('images') ? ' is-invalid' : '' }}" name="images[]" value="{{ old('images') }}" required multiple>
+									<input id="images" type="file" class="form-control{{ $errors->has('images') ? ' is-invalid' : '' }}" name="images[]" value="{{ old('images') }}" multiple>
 
 									@if ($errors->has('images'))
 										<span class="invalid-feedback" role="alert">

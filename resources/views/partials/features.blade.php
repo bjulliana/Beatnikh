@@ -10,6 +10,9 @@
 		</div>
 		<div class="row">
 			@foreach($products as $product)
+				@if($loop->iteration > 4)
+					@break
+				@endif
 				<div class="col-6 col-sm-4 col-lg-3">
 					<div class="feature-product">
 						<div class="image">

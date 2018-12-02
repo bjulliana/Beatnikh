@@ -1,8 +1,24 @@
 body {
   background-color: #ffffff; }
 
-.navigation-menu {
-  background-color: #369599; }
+.menu-top {
+  background-color: #369599;
+  padding: 0.3125rem 0; }
+  .menu-top .social-icons li {
+    padding-right: 0.625rem; }
+    .menu-top .social-icons li:hover {
+      color: #f8f8f8; }
+  .menu-top .nav-item a {
+    padding: 0 0.625rem; }
+
+.social-icons {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0; }
+  .social-icons a {
+    color: #f8fafc; }
 
 .dropdown-menu .dropdown-item {
   color: #1e1e1e; }
@@ -30,12 +46,17 @@ ul {
   margin: 0;
   padding: 0; }
 
-.main-menu a {
-  color: #ffffff;
-  text-transform: uppercase; }
-
 .header-nav {
   flex-wrap: nowrap; }
+
+.navigation-menu .main-menu .navbar-expand-md {
+  justify-content: space-between; }
+.navigation-menu .main-menu .navbar {
+  padding: 0; }
+  .navigation-menu .main-menu .navbar .navbar-collapse {
+    flex-grow: 0; }
+.navigation-menu .main-menu a {
+  text-transform: uppercase; }
 
 .main-content {
   min-height: calc(100vh - 300px); }
@@ -43,6 +64,11 @@ ul {
 .custom-file-label {
   right: 0.9375rem;
   left: 0.9375rem; }
+
+.search-area {
+  background-color: #f8f8f8; }
+  .search-area .search-container {
+    background-color: #ffffff; }
 
 .hero-area {
   background-color: #f8f8f8; }
@@ -176,25 +202,19 @@ ul {
   .footer-container .footer-social-link-container {
     border-top: 1px solid #333333;
     border-bottom: 1px solid #333333; }
+    .footer-container .footer-social-link-container .social-icons {
+      justify-content: space-evenly; }
+      .footer-container .footer-social-link-container .social-icons a {
+        color: #f8fafc;
+        transition: 0.2s ease-in-out; }
+        .footer-container .footer-social-link-container .social-icons a:hover {
+          color: #369599; }
     .footer-container .footer-social-link-container .title {
       font-size: 0.875rem;
       line-height: 1rem;
       color: #ffffff;
       font-weight: 400;
       margin-right: 10px; }
-    .footer-container .footer-social-link-container .social-icons {
-      padding: 0;
-      list-style: none;
-      display: flex;
-      color: #f8fafc;
-      justify-content: space-evenly;
-      align-items: center;
-      margin-bottom: 0; }
-      .footer-container .footer-social-link-container .social-icons a {
-        color: #f8fafc;
-        transition: 0.2s ease-in-out; }
-        .footer-container .footer-social-link-container .social-icons a:hover {
-          color: #369599; }
     .footer-container .footer-social-link-container .app-download-area {
       display: flex;
       align-items: center;

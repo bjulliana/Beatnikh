@@ -25,79 +25,79 @@
 </head>
 <body>
 <div id="app">
-	<div class="menu-top py-4 navbar-laravel">
+	<div class="menu-top">
 		<div class="container">
 			<div class="row align-items-center">
-				<div class="col-6 order-1 order-md-1 col-md-2 text-center">
-					<div class="logo">
-						<a href="/">Beatnikh</a>
+				<div class="col-6 text-left">
+					<ul class="social-icons">
+						<li><a target="_blank" href="http://www.twitter.com/"><i class="fab fa-twitter"></i></a></li>
+						<li><a target="_blank" href="http://www.rss.com/"><i class="fa fa-rss"></i></a></li>
+						<li><a target="_blank" href="http://plus.google.com/"><i class="fab fa-google-plus"></i></a></li>
+						<li><a target="_blank" href="http://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+						<li><a target="_blank" href="http://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
+						<li><a target="_blank" href="http://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+					</ul>
+				</div>
+				<div class="col-6">
+					<div class="nav-item">
+						<ul class="nav header-nav justify-content-end">
+							@guest
+								<li class="nav-item">
+									<a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
+								</li>
+								<li class="nav-item">
+									@if (Route::has('register'))
+										<a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
+									@endif
+								</li>
+							@else
+								<li class="nav-item dropdown">
+									<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+										<img src="/uploads/users/{{ Auth::user()->photo }}" style="width:32px; height:32px; margin-right: 10px; border-radius:50%">
+										<span class="d-none d-sm-inline">{{ Auth::user()->name }} </span><span class="user_img"></span>
+									</a>
+
+									<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+										<li><a class="dropdown-item" href="{{ url('/profile') }}">My Account</a></li>
+										<li><a class="dropdown-item" href="{{ route('logout') }}"
+										       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+												{{ __('Logout') }}
+											</a>
+											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+												@csrf
+											</form>
+										</li>
+									</ul>
+								</li>
+							@endguest
+						</ul>
 					</div>
-				</div>
-				<div class="col-12 order-3 order-md-2 col-md-8">
-					<form action="#">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search" aria-label="Search Products" aria-describedby="button-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="col-6 order-2 order-md-3 col-md-2">
-					@guest
-						<a class="btn btn-primary" href="{{ route('login') }}" role="button">Post Ad</a>
-					@else
-						<a class="btn btn-primary" href="{{ url('products/new') }}" role="button">Post Ad</a>
-					@endguest
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="navigation-menu">
+	<div class="navigation-menu border-bottom">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-lg-12">
-					<div class="main-menu">
-						<nav class="navbar navbar-dark navbar-expand-md">
+					<div class="main-menu py-3">
+						<nav class="navbar navbar-light navbar-expand-md">
+							<div class="navbar-brand order-1">
+								<a href="/">Beatnikh</a>
+							</div>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="navbar-toggler-icon"></span>
 							</button>
-							<div class="nav-item ml-auto order-1">
-								<ul class="nav header-nav">
-									@guest
-										<li class="nav-item">
-											<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-										</li>
-										<li class="nav-item">
-											@if (Route::has('register'))
-												<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-											@endif
-										</li>
-									@else
-										<li class="nav-item dropdown">
-											<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-												<img src="/uploads/users/{{ Auth::user()->photo }}" style="width:32px; height:32px; margin-right: 10px; border-radius:50%">
-												<span class="d-none d-sm-inline">{{ Auth::user()->name }} </span><span class="user_img"></span>
-											</a>
-
-											<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="{{ url('/profile') }}">My Account</a></li>
-												<li><a class="dropdown-item" href="{{ route('logout') }}"
-												       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-														{{ __('Logout') }}
-													</a>
-													<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-														@csrf
-													</form>
-												</li>
-											</ul>
-										</li>
-									@endguest
-								</ul>
+							<div class="order-2 order-md-3 order-1 text-right">
+								@guest
+									<a class="btn btn-primary" href="{{ route('login') }}" role="button">Post Ad</a>
+								@else
+									<a class="btn btn-primary" href="{{ url('products/new') }}" role="button">Post Ad</a>
+								@endguest
 							</div>
 							<div class="collapse navbar-collapse order-0" id="main-nav">
-								<ul class="navbar-nav py-3">
+								<ul class="navbar-nav">
 									<li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
 									<li class="nav-item"><a class="nav-link" href="{{ route('shop') }}">Browse Products</a></li>
 									@guest
@@ -168,8 +168,9 @@
 </div>
 
 @if (Request::is('products/show/*'))
-	<script src="/js/main.js"></script>
+	<script src="{{ asset('js/main.js') }}"></script>
 @endif
+<script src="{{ asset('js/livesearch.js') }}"></script>
 
 </body>
 </html>

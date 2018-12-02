@@ -5,8 +5,35 @@ body {
 	background-color: $bg-color;
 }
 
-.navigation-menu {
+.menu-top {
 	background-color: $accent-1;
+	padding: rem-calc(5 0);
+
+	.social-icons {
+		li {
+			padding-right: rem-calc(10);
+
+			&:hover {
+				color: $bg-alt;
+			}
+		}
+	}
+
+	.nav-item a {
+		padding: rem-calc(0 10)
+	}
+}
+
+.social-icons {
+	padding: 0;
+	list-style: none;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0;
+
+	a {
+		color: $body-bg;
+	}
 }
 
 .dropdown-menu {
@@ -44,16 +71,29 @@ ul {
 	padding: 0;
 }
 
-.main-menu {
-
-	a {
-		color: $bg-color;
-		text-transform: uppercase;
-	}
-}
-
 .header-nav {
 	flex-wrap: nowrap;
+}
+
+.navigation-menu {
+	.main-menu {
+
+		.navbar-expand-md {
+			justify-content: space-between;
+		}
+
+		.navbar {
+			padding: 0;
+
+			.navbar-collapse {
+				flex-grow: 0;
+			}
+		}
+
+		a {
+			text-transform: uppercase;
+		}
+	}
 }
 
 .main-content {
@@ -63,6 +103,14 @@ ul {
 .custom-file-label {
 	right: rem-calc(15);
 	left: rem-calc(15);
+}
+
+.search-area {
+	background-color: $bg-alt;
+
+	.search-container {
+		background-color: $bg-color;
+	}
 }
 
 .hero-area {
@@ -249,22 +297,8 @@ ul {
 		border-top: 1px solid $dark-grey;
 		border-bottom: 1px solid $dark-grey;
 
-		.title {
-			font-size: rem-calc(14);
-			line-height: rem-calc(16);
-			color: $bg-color;
-			font-weight: 400;
-			margin-right: 10px;
-		}
-
 		.social-icons {
-			padding: 0;
-			list-style: none;
-			display: flex;
-			color: $body-bg;
 			justify-content: space-evenly;
-			align-items: center;
-			margin-bottom: 0;
 
 			a {
 				color: $body-bg;
@@ -274,6 +308,14 @@ ul {
 					color: $accent-1;
 				}
 			}
+		}
+
+		.title {
+			font-size: rem-calc(14);
+			line-height: rem-calc(16);
+			color: $bg-color;
+			font-weight: 400;
+			margin-right: 10px;
 		}
 
 		.app-download-area {
@@ -598,8 +640,9 @@ ul {
 		}
 	}
 }
+
 .table {
-	tbody{
+	tbody {
 		th,
 		td {
 			vertical-align: middle;

@@ -11,7 +11,7 @@
 							<ul class="category-list">
 								<li><a href="{{ route('shop') }}">All</a></li>
 								@foreach ($categories as $category)
-									@if ($category->products->count() > 1)
+									@if ($category->products->count() > 0)
 										<li class=""><a href="{{ route('shop', ['category' => $category->id]) }}">{{ $category->title }}</a>
 									@endif
 								@endforeach

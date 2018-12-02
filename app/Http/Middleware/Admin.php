@@ -8,10 +8,13 @@ use Closure;
 class Admin {
 
 	public function handle($request, Closure $next) {
-		if (auth()->user()->isAdmin()) {
-			return $next($request);
+		if (auth()->check()) {
+
+			if (auth()->user()->isAdmin()) {
+				return $next($request);
+			}
 		}
 
-		return redirect('home');
+		return redirect(route('home'));
 	}
 }

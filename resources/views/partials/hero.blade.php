@@ -9,7 +9,7 @@
 								<nav class="category-menu" style="">
 									<ul>
 										@foreach($categories as $category)
-											@if ($category->products->count() > 1)
+											@if ($category->products->count() > 0)
 												<li><a href="#">{{ $category->title }}</a></li>
 											@endif
 										@endforeach

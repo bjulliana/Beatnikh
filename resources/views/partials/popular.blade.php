@@ -9,7 +9,10 @@
 		</div>
 		<div class="row">
 			@foreach($categories as $category)
-				@if ($category->products->count() > 1)
+				@if($loop->iteration > 5)
+					@break
+				@endif
+				@if ($category->products->count() > 0)
 					<div class="col-6 col-md-3">
 						<div class="category-banner">
 							<a href="#">
