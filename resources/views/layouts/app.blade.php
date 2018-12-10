@@ -9,6 +9,9 @@
 
 <title>{{ config('app.name', 'Beatnikh') }}</title>
 
+<!-- Favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.png') }}">
+
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -31,7 +34,6 @@
 				<div class="col-6 text-left">
 					<ul class="social-icons">
 						<li><a target="_blank" href="http://www.twitter.com/"><i class="fab fa-twitter"></i></a></li>
-						<li><a target="_blank" href="http://www.rss.com/"><i class="fa fa-rss"></i></a></li>
 						<li><a target="_blank" href="http://plus.google.com/"><i class="fab fa-google-plus"></i></a></li>
 						<li><a target="_blank" href="http://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
 						<li><a target="_blank" href="http://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
@@ -43,7 +45,7 @@
 						<ul class="nav header-nav justify-content-end">
 							@guest
 								<li class="nav-item">
-									<a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
+									<a class="nav-link text-white" href="{{ route('login') . '?previous=' . Request::fullUrl() }}">{{ __('Login') }}</a>
 								</li>
 								<li class="nav-item">
 									@if (Route::has('register'))
@@ -53,12 +55,15 @@
 							@else
 								<li class="nav-item dropdown">
 									<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-										<img src="/uploads/users/{{ Auth::user()->photo }}" style="width:32px; height:32px; margin-right: 10px; border-radius:50%">
-										<span class="d-none d-sm-inline">{{ Auth::user()->name }} </span><span class="user_img"></span>
+										<img class="rounded-circle user-thumb" src="/uploads/users/{{ Auth::user()->photo }}">
+										<span class="d-none d-sm-inline text-white">{{ Auth::user()->name }} </span>
 									</a>
 
 									<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 										<li><a class="dropdown-item" href="{{ url('/profile') }}">My Account</a></li>
+										@if ( Auth::user()->role == 'admin' )
+											<li><a class="dropdown-item" href="{{ route('categories.show') }}">{{ __('Manage Categories') }}</a></li>
+										@endif
 										<li><a class="dropdown-item" href="{{ route('logout') }}"
 										       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -83,28 +88,25 @@
 				<div class="col-12 col-lg-12">
 					<div class="main-menu py-3">
 						<nav class="navbar navbar-light navbar-expand-md">
-							<div class="navbar-brand order-1">
-								<a href="/">Beatnikh</a>
+							<div class="navbar-brand order-1 order-md-0">
+								<a href="/"><img src="{{ asset('svg/logo.svg') }}"></a>
 							</div>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="navbar-toggler-icon"></span>
 							</button>
 							<div class="order-2 order-md-3 order-1 text-right">
 								@guest
-									<a class="btn btn-primary" href="{{ route('login') }}" role="button">Post Ad</a>
+									<a class="btn btn-primary" href="{{ route('login') . '?previous=' . Request::fullUrl() }}" role="button">{{ __('Post Ad') }}</a>
 								@else
-									<a class="btn btn-primary" href="{{ url('products/new') }}" role="button">Post Ad</a>
+									<a class="btn btn-primary" href="{{ url('products/new') }}" role="button">{{ __('Post Ad') }}</a>
 								@endguest
 							</div>
 							<div class="collapse navbar-collapse order-0" id="main-nav">
 								<ul class="navbar-nav">
-									<li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-									<li class="nav-item"><a class="nav-link" href="{{ route('shop') }}">Browse Products</a></li>
+									<li class="nav-item"><a class="nav-link" href="/">{{ __('Home') }}</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ route('shop') }}">{{ __('Browse Products') }}</a></li>
 									@guest
 									@else
-										@if ( Auth::user()->role == 'admin' )
-											<li class="nav-item"><a class="nav-link" href="{{ route('categories.show') }}">Manage Categories</a></li>
-										@endif
 									@endguest
 								</ul>
 							</div>
@@ -128,18 +130,17 @@
 			<div class="row align-items-center">
 				<div class="col-12 col-lg-6 col-md-7 text-left text-sm-center text-lg-left">
 					<div class="app-download-area mb-3 mb-md-0">
-						<span class="title">Download our App:</span>
+						<span class="title">{{ __('Download our App:') }}</span>
 						<div class="social-buttons">
-							<a target="_blank" href="#" class="app-download-btn apple-store"><i class="fab fa-apple"></i> Apple Store</a>
-							<a target="_blank" href="#" class="app-download-btn google-play"><i class="fab fa-android"></i> Google play</a>
+							<a target="_blank" href="#" class="app-download-btn apple-store"><i class="fab fa-apple"></i> {{ __('Apple Store') }}</a>
+							<a target="_blank" href="#" class="app-download-btn google-play"><i class="fab fa-android"></i> {{ __('Google Play') }}</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-12 col-lg-6 col-md-5 text-left text-sm-center text-md-right">
 					<ul class="social-icons">
-						<li><span class="title">Follow Us:</span></li>
+						<li><span class="title">{{ __('Follow Us:') }}</span></li>
 						<li><a target="_blank" href="http://www.twitter.com/"><i class="fab fa-twitter"></i></a></li>
-						<li><a target="_blank" href="http://www.rss.com/"><i class="fa fa-rss"></i></a></li>
 						<li><a target="_blank" href="http://plus.google.com/"><i class="fab fa-google-plus"></i></a></li>
 						<li><a target="_blank" href="http://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
 						<li><a target="_blank" href="http://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
@@ -155,13 +156,13 @@
 		<div class="row py-3">
 			<div class="col-12 col-md-6">
 				<ul class="navigation-container">
-					<li><a href="#">About Us</a></li>
-					<li><a href="#">Privacy Policy</a></li>
-					<li><a href="#">Terms &amp; Conditions</a></li>
+					<li><a href="#">{{ __('About Us') }}</a></li>
+					<li><a href="#">{{ __('Privacy Policy') }}</a></li>
+					<li><a href="#">{{ __('Terms & Conditions') }}</a></li>
 				</ul>
 			</div>
 			<div class="col-12 col-md-6">
-				<p class="copyright-text">Copyright {{ date('Y') }} <a href="#">Beatnikh</a>. All Rights Reserved</p>
+				<p class="copyright-text">{{ __('Copyright ') }} {{ date('Y') }} <a href="#">{{ __('Beatnikh') }}</a>{{ __('. All Rights Reserved') }}</p>
 			</div>
 		</div>
 	</div>

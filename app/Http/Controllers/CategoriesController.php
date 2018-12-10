@@ -8,7 +8,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class CategoriesController extends Controller {
 
@@ -118,6 +118,9 @@ class CategoriesController extends Controller {
 			$category->title = $request->get('title');
 
 			if ($request->hasfile('image')) {
+				$image_path = public_path() . '/uploads/categories/' . $category->image;
+				File::delete($image_path);
+
 				$image    = $request->file('image');
 				$filename = $image->getClientOriginalName();
 				Image::make($image)->resize(
@@ -138,7 +141,9 @@ class CategoriesController extends Controller {
 
 	public function destroy($id) {
 		$category = Category::find($id);
-		Storage::delete($category->image);
+		$image_path = public_path() . '/uploads/categories/' . $category->image;
+		File::delete($image_path);
+
 		$category->delete();
 
 		return redirect(route('categories.show'))->with('success', 'Category ' . $category->title . ' Deleted!');

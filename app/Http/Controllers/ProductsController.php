@@ -7,10 +7,8 @@ use App\Message;
 use App\ProductsImage;
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ProductsController extends Controller {
 
@@ -21,26 +19,37 @@ class ProductsController extends Controller {
 
 		$pagination = 9;
 		$categories = Category::with('products')->orderBy('title', 'asc')->get();
+		$products   = Product::with('category');
 
 		if (request()->category) {
-			$products = Product::with('category')->whereHas(
+			$products = $products->whereHas(
 				'category', function ($query) {
 				$query->where('category_id', request()->category);
 			}
-			)->paginate($pagination);
-		} else {
-			$products = Product::with('category')->paginate($pagination);
-		}
-		
-		if (request()->sort == 'low_high') {
-			$products = Product::with('category')->orderBy('price')->paginate($pagination);
-		} else if (request()->sort == 'high_low') {
-			$products = Product::with('category')->orderBy('price', 'desc')->paginate($pagination);
-		} else {
-			$products = Product::with('category')->paginate($pagination);
+			);
 		}
 
+		if (request()->sort == 'low_high') {
+			$products = $products->orderBy('price');
+		} else if (request()->sort == 'high_low') {
+			$products = $products->orderBy('price', 'desc');
+		}
+
+		$products = $products->paginate($pagination);
+
 		return view('shop', compact('products', 'categories'));
+	}
+
+	public function search(Request $request) {
+		$str = $request->input('str');
+
+		// $result = Product::with('images')->where('title', 'like', '%' . $str . '%')->get();
+		$result = Product::with('images')->where('title', 'like', "%$str%")->get();
+
+		// return $str;
+		return $result;
+		// return response()->json(['data' => $result]);
+
 	}
 
 	/**
@@ -191,11 +200,17 @@ class ProductsController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function destroy($id) {
-		$product = Category::find($id);
-		Storage::detele($product->images);
+		$product = Product::find($id);
+		$images  = $product->images()->get();
+
+		foreach ($images as $image) {
+			$image_path = public_path() . '/uploads/products/' . $image->file_name;
+			File::delete($image_path);
+		}
+
 		$product->delete();
 
-		return view('auth.profile')->with('success', 'Product Deleted!');
+		return back()->with('success', 'Product Deleted!');
 	}
 
 }

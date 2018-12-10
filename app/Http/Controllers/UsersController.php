@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class UsersController extends Controller {
 
@@ -14,7 +14,7 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function show() {
-		$user = Auth::user();
+		$user     = Auth::user();
 		$products = Auth::user()->products()->with('images')->get();
 
 		return view('auth.profile', compact('user', 'products'));
@@ -79,11 +79,11 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function destroy($id) {
-		$user = User::find($id);
-		Storage::delete($user->photo);
+		$user       = User::find($id);
+		$image_path = public_path() . '/uploads/users/' . $user->photo;
+		File::delete($image_path);
 		$user->delete();
 
-		return view('home');
+		return redirect(route('home'));
 	}
-
 }

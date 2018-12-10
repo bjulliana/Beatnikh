@@ -20,6 +20,9 @@
 				</div>
 			@endif
 		</div>
+		<div class="row justify-content-end">
+			<a class="btn btn-danger" onclick='return confirm("Are you sure?")' href="{{ route('profile.drop', $user->id) }}">{{ __('Delete Profile') }}</a>
+		</div>
 		<div class="row justify-content-center">
 			<div class="col-3 profile-header-container">
 				<div class="profile-header-img">

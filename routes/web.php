@@ -20,6 +20,7 @@ Route::get('/shop', 'ProductsController@index')->name('shop');
 Route::get('profile', 'UsersController@show')->middleware('auth')->name('profile.show');
 Route::get('profile/edit/{id}', 'UsersController@edit')->middleware('auth')->name('profile.edit');
 Route::post('profile/{id}/update', 'UsersController@update')->middleware('auth')->name('profile.update');
+Route::get('/profile/drop/{id}', 'UsersController@destroy')->middleware('auth')->name('profile.drop');
 
 //Products
 Route::get('/products/new', 'ProductsController@create')->name('products.new');
@@ -28,7 +29,7 @@ Route::get('/products/show/{id}', 'ProductsController@show')->name('products.sho
 Route::get('/products/edit/{id}', 'ProductsController@edit')->name('products.edit');
 Route::post('/products/{id}/update', 'ProductsController@update')->name('products.update');
 Route::get('/products/drop/{id}', 'ProductsController@destroy')->name('products.drop');
-
+Route::get('/search', 'ProductsController@search')->name('products.search');
 
 //Categories
 Route::get('/category/show', 'CategoriesController@index')->middleware('admin')->name('categories.show');
