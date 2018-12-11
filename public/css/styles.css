@@ -114,7 +114,9 @@ Search
   position: absolute;
   z-index: 1;
   width: calc(100% - 30px);
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-top: 0; }
   @media (min-width: 576px) {
     .result-list {
       max-width: 510px; } }
@@ -132,6 +134,8 @@ Search
   .result-list .list-group-item .product-thumbnail {
     max-width: 50px;
     margin-right: 1.25rem; }
+  .result-list .list-group-item:first-child {
+    border-top: 0; }
   .result-list.active {
     display: block; }
 

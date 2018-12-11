@@ -43,12 +43,9 @@ class ProductsController extends Controller {
 	public function search(Request $request) {
 		$str = $request->input('str');
 
-		// $result = Product::with('images')->where('title', 'like', '%' . $str . '%')->get();
 		$result = Product::with('images')->where('title', 'like', "%$str%")->get();
 
-		// return $str;
-		return $result;
-		// return response()->json(['data' => $result]);
+		return response()->json($result);
 
 	}
 

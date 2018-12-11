@@ -182,9 +182,10 @@ Search
 	display: none;
 	position: absolute;
 	z-index: 1;
-	//max-width: 545px;
 	width: calc(100% - 30px);
 	background-color: $white;
+	border: 1px solid $light-grey;
+	border-top: 0;
 
 	@media (min-width: 576px) {
 		max-width: 510px;
@@ -210,6 +211,10 @@ Search
 		.product-thumbnail {
 			max-width: 50px;
 			margin-right: rem-calc(20);
+		}
+
+		&:first-child {
+			border-top: 0;
 		}
 	}
 

@@ -35,21 +35,4 @@ class MessagesController extends Controller {
 
 		return redirect()->back()->withErrors($validator->errors())->withInput()->with('error', 'Problem Submitting Message!');
 	}
-
-	public function show($id) {
-
-	}
-
-	public function edit($id) {
-
-	}
-
-	public function update($id) {
-
-	}
-
-	public function destroy($id) {
-
-	}
-
 }

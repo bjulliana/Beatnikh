@@ -1,7 +1,6 @@
 (function () {
 	'use strict';
 
-	console.log('loaded');
 	let searchField = document.querySelector('.search-input'),
 	    resultList  = document.querySelector('.result-list'),
 	    content;
@@ -25,11 +24,10 @@
 					return response.json();
 
 				}).then(function (data) {
-				console.log(data);
 				resultList.classList.add('active');
 
 				if (data.length === 0) {
-					resultList.innerHTML = '<div class="column-small-12">No Items Match your Query</div>';
+					resultList.innerHTML = '<div class="column-small-12 py-2">No Items Match your Query</div>';
 				}
 
 				data.forEach(function (item) {
