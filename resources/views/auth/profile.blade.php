@@ -29,10 +29,6 @@
 					<div class="col-md-4"><strong>{{ __('E-Mail Address') }}</strong></div>
 					<div class="col-md-6">{{ $user->email }}</div>
 				</div>
-				<div class="row py-2">
-					<div class="col-md-4"><strong>{{ __('Photo') }}</strong></div>
-					<div class="col-md-6">{{ $user->photo }}</div>
-				</div>
 				<div class="row my-3">
 					<div class="col-md-6 offset-md-4">
 						<a href="{{ route('profile.edit', $user->id) }}" class="btn btn-primary">

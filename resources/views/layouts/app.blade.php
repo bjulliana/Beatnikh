@@ -88,26 +88,23 @@
 				<div class="col-12 col-lg-12">
 					<div class="main-menu py-3">
 						<nav class="navbar navbar-light navbar-expand-md">
-							<div class="navbar-brand order-1 order-md-0">
-								<a href="/"><img src="{{ asset('svg/logo.svg') }}"></a>
-							</div>
-							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
-							</button>
-							<div class="order-2 order-md-3 order-1 text-right">
+							<div class="text-right order-md-2">
 								@guest
 									<a class="btn btn-primary" href="{{ route('login') . '?previous=' . Request::fullUrl() }}" role="button">{{ __('Post Ad') }}</a>
 								@else
 									<a class="btn btn-primary" href="{{ url('products/new') }}" role="button">{{ __('Post Ad') }}</a>
 								@endguest
 							</div>
-							<div class="collapse navbar-collapse order-0" id="main-nav">
+							<div class="navbar-brand order-md-0">
+								<a href="/"><img src="{{ asset('svg/logo.svg') }}"></a>
+							</div>
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse" id="main-nav">
 								<ul class="navbar-nav">
 									<li class="nav-item"><a class="nav-link" href="/">{{ __('Home') }}</a></li>
 									<li class="nav-item"><a class="nav-link" href="{{ route('shop') }}">{{ __('Browse Products') }}</a></li>
-									@guest
-									@else
-									@endguest
 								</ul>
 							</div>
 						</nav>

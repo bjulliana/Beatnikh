@@ -6,6 +6,9 @@
 		<div class="alert">
 			@include('alerts')
 		</div>
+		<div class="col-12 text-center mb-4">
+			<h2>{{ __('Categories') }}</h2>
+		</div>
 		<div class="text-right">
 			<a href="{{ route('categories.new') }}" class="btn btn-primary mb-3">{{ __('New Category') }}</a>
 		</div>

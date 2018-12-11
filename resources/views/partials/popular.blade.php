@@ -1,4 +1,4 @@
-<div class="popular-categories pt-5">
+<div class="popular-categories py-5">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 mb-5">
@@ -12,7 +12,7 @@
 				@if($loop->iteration > 4)
 					@break
 				@endif
-				<div class="col-6 col-md-3">
+				<div class="col-6 col-md-3 mb-4">
 					<div class="category-banner">
 						<a href="{{ route('shop', ['category' => $category->id]) }}">
 							<img src="/uploads/categories/{{ $category->image }}" class="img-fluid" alt="">

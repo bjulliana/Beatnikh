@@ -5,22 +5,29 @@
 		@include('partials.search')
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-3 order-2 order-lg-1">
+				<div class="col-lg-3">
 					<div class="sidebar-container shop-sidebar-container">
 						<div class="single-sidebar-widget mb-3">
-							<h3 class="sidebar-title">{{ __('Categories') }}</h3>
-							<ul class="category-list">
-								<li><a href="{{ route('shop') }}">{{ __('All') }}</a></li>
-								@foreach ($categories as $category)
-									<li class=""><a href="{{ route('shop', ['category' => $category->id]) }}">{{ $category->title }}</a>
-								@endforeach
-							</ul>
+							<h3 class="sidebar-title d-none d-lg-block">{{ __('Categories') }}</h3>
+							<nav class="navbar-expand-lg">
+								<a class="navbar-toggler" type="button" data-toggle="collapse" data-target="#categories-menu" aria-controls="categories-menu" aria-expanded="false" aria-label="Toggle Categories">
+									<span class="lnr lnr-menu"></span>View Categories
+								</a>
+								<nav class="category-menu collapse navbar-collapse" id="categories-menu">
+									<ul class="category-list">
+										<li><a href="{{ route('shop') }}">{{ __('All') }}</a></li>
+										@foreach ($categories as $category)
+											<li class=""><a href="{{ route('shop', ['category' => $category->id]) }}">{{ $category->title }}</a>
+										@endforeach
+									</ul>
+								</nav>
+							</nav>
+
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-9 order-1 order-lg-2">
+				<div class="col-lg-9">
 					<div class="shop-header mb-20">
-
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-12 mb-sm-20 d-flex align-items-center">
 								<p class="result-show-message">{{ __('Showing ') }} {{ $products->firstItem() }}–{{ $products->lastItem() }} of {{ $products->total() }} {{ __(' results') }}</p>
@@ -28,7 +35,6 @@
 							<div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column flex-sm-row justify-content-start justify-content-md-end align-items-sm-center">
 
 								<div class="sort-by-dropdown d-flex align-items-center mb-xs-10">
-									{{--<p class="mr-10 mb-0">Sort By: </p>--}}
 									<div>
 										<strong>{{ __('Sort by price:') }}</strong>
 										<a href="{{ route('shop', ['category'=> request()->category, 'sort' => 'low_high']) }}">{{ __('Low to High') }}</a> |

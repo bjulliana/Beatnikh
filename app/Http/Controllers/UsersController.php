@@ -39,6 +39,7 @@ class UsersController extends Controller {
 	 */
 	public function update(Request $request, $id) {
 
+		$products = Auth::user()->products()->with('images')->get();
 		$data      = request()->input();
 		$validator = validator()->make(
 			$data, [
@@ -67,10 +68,10 @@ class UsersController extends Controller {
 			}
 			$user->save();
 
-			return view('auth.profile', ['user' => Auth::user()])->with('success', 'Your changes were saved successfully.');
-		}
+			return redirect(route('profile.show'))->with('success', 'Details Updated successfully!');
+			}
 
-		return view('auth.profile', ['user' => Auth::user()])->withErrors($validator->errors())->withInput()->with('error', 'Problem Updating Profile!');
+		return back()->withErrors($validator->errors())->withInput()->with('error', 'Problem Updating Profile!');
 	}
 
 	/**

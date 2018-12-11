@@ -21,6 +21,7 @@ Route::get('profile', 'UsersController@show')->middleware('auth')->name('profile
 Route::get('profile/edit/{id}', 'UsersController@edit')->middleware('auth')->name('profile.edit');
 Route::post('profile/{id}/update', 'UsersController@update')->middleware('auth')->name('profile.update');
 Route::get('/profile/drop/{id}', 'UsersController@destroy')->middleware('auth')->name('profile.drop');
+// Route::get('/profile/drop/{id}', 'UsersController@destroy')->middleware('auth')->name('profile.drop');
 
 //Products
 Route::get('/products/new', 'ProductsController@create')->name('products.new');

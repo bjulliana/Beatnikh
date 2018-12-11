@@ -3,30 +3,14 @@
 
 	<div class="container py-5">
 		<div class="row">
-			@if ($message = Session::get('success'))
-				<div class="alert alert-success alert-block">
-					<button type="button" class="close" data-dismiss="alert">×</button>
-					<strong>{{ $message }}</strong>
-				</div>
-			@endif
-			@if (count($errors) > 0)
-				<div class="alert alert-danger">
-					<strong>Whoops!</strong> There were some problems with your input.<br><br>
-					<ul>
-						@foreach ($errors->all() as $error)
-							<li>{{ $error }}</li>
-						@endforeach
-					</ul>
-				</div>
-			@endif
-		</div>
-		<div class="row justify-content-end">
-			<a class="btn btn-danger" onclick='return confirm("Are you sure?")' href="{{ route('profile.drop', $user->id) }}">{{ __('Delete Profile') }}</a>
+			<div class="col-12">
+				@include('alerts')
+			</div>
 		</div>
 		<div class="row justify-content-center">
-			<div class="col-3 profile-header-container">
+			<div class="col-6 col-md-3 profile-header-container">
 				<div class="profile-header-img">
-					<img class="rounded-circle" src="/uploads/users/{{ $user->photo }}" />
+					<img class="rounded" src="/uploads/users/{{ $user->photo }}" />
 				</div>
 			</div>
 		</div>
@@ -102,6 +86,9 @@
 					</div>
 				</form>
 			</div>
+		</div>
+		<div class="row justify-content-center">
+			<a class="btn btn-danger" onclick='return confirm("Are you sure?")' href="{{ route('profile.drop', $user->id) }}">{{ __('Delete Profile') }}</a>
 		</div>
 	</div>
 @endsection

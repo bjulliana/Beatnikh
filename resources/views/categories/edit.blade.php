@@ -6,7 +6,7 @@
 			@include('alerts')
 		</div>
 		<div class="row justify-content-center">
-			<div class="col-3">
+			<div class="col-6 col-md-3">
 				<div class="category-img">
 					<img src="/uploads/categories/{{ $category->image }}" />
 				</div>

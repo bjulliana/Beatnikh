@@ -8,7 +8,7 @@
 				@include('alerts')
 			</div>
 			<div class="row product-details mb-5">
-				<div class="col-lg-6 px-0">
+				<div class="col-md-6">
 					<div class="product-images">
 						<div class="image-main mb-2 border">
 							<img src="/uploads/products/{{ $product->images->first()->file_name }}" id="selected">
@@ -24,7 +24,7 @@
 						@endif
 					</div>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-md-6">
 					<div class="single-product-details-container">
 						<p class="product-title my-4">{{ $product->title }}</p>
 						<p class="product-owner">{{ __('Sold By ') }} {{ $product->user->username }}</p>
@@ -40,50 +40,52 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div id="comments" class="card">
-					<h5 class="card-header">{{ __('Comments ') }} ({{ count($messages) }})</h5>
-					<div class="card-body">
-						@if ( count($messages) > 0)
-							@foreach($messages as $message)
-								<div class="comment-wrapper mb-4 @if($product->user->username === $message->username) owner @endif">
-									<div class="comment-content">
-										<div class="comment-author"><p>{{ $message->username }}</p></div>
-										<p>{{ __('Posted in ') }} {{ $message->created_at->format('d M Y') }}</p>
-										<p>{{ $message->content }}</p>
+			<div id="comments" class="row comments">
+				<div class="col-12">
+					<div class="card">
+						<h5 class="card-header">{{ __('Comments ') }} ({{ count($messages) }})</h5>
+						<div class="card-body">
+							@if ( count($messages) > 0)
+								@foreach($messages as $message)
+									<div class="comment-wrapper mb-4 @if($product->user->username === $message->username) owner @endif">
+										<div class="comment-content">
+											<div class="comment-author"><p>{{ $message->username }}</p></div>
+											<p>{{ __('Posted in ') }} {{ $message->created_at->format('d M Y') }}</p>
+											<p>{{ $message->content }}</p>
+										</div>
+										<hr>
 									</div>
-									<hr>
-								</div>
-							@endforeach
-						@else
-							<div class="no-comments">
-								<p>{{ __('No Messages') }}</p>
-							</div>
-							<hr>
-						@endif
-						<div class="comment-form-wrapper fix">
-							<h3 class="form-title">{{ __('Send a Message') }}</h3>
-							@guest
-								<p>{{ __('You must be logged in to post a message') }}</p>
-								<a class="btn btn-primary" href="{{ route('login') . '?previous=' . Request::fullUrl() }}">{{ __('Login') }}</a>
-								<a class="btn btn-primary" href="{{ route('register') }}">{{ __('Register') }}</a>
+								@endforeach
 							@else
-								<form method="post" action="{{ url('/message/add') }}">
-									@csrf
-									<div class="comment-form row">
-										<div class="d-none" aria-hidden="true">
-											<input name="product_id" id="product_id" value="{{ $product->id }}">
+								<div class="no-comments">
+									<p>{{ __('No Messages') }}</p>
+								</div>
+								<hr>
+							@endif
+							<div class="comment-form-wrapper fix">
+								<h3 class="form-title">{{ __('Send a Message') }}</h3>
+								@guest
+									<p>{{ __('You must be logged in to post a message') }}</p>
+									<a class="btn btn-primary" href="{{ route('login') . '?previous=' . Request::fullUrl() }}">{{ __('Login') }}</a>
+									<a class="btn btn-primary" href="{{ route('register') }}">{{ __('Register') }}</a>
+								@else
+									<form method="post" action="{{ url('/message/add') }}">
+										@csrf
+										<div class="comment-form row">
+											<div class="d-none" aria-hidden="true">
+												<input name="product_id" id="product_id" value="{{ $product->id }}">
+											</div>
+											<div class="col-12 mb-4">
+												<label for="message">{{ __('Your Message:') }}</label>
+												<textarea name="content" id="content" placeholder="Message" required></textarea>
+											</div>
+											<div class="col-12">
+												<button class="btn btn-primary" type="submit">{{ __('Send Message:') }}</button>
+											</div>
 										</div>
-										<div class="col-12 mb-4">
-											<label for="message">{{ __('Your Message:') }}</label>
-											<textarea name="content" id="content" placeholder="Message" required></textarea>
-										</div>
-										<div class="col-12">
-											<button class="btn btn-primary" type="submit">{{ __('Send Message:') }}</button>
-										</div>
-									</div>
-								</form>
-							@endguest
+									</form>
+								@endguest
+							</div>
 						</div>
 					</div>
 				</div>

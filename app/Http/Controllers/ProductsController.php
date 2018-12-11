@@ -188,7 +188,7 @@ class ProductsController extends Controller {
 				}
 			}
 
-			return redirect(route('profile.show') . '#products')->with('success', 'Product Updated successfully!');
+			return redirect(route('profile.show'))->with('success', 'Product Updated successfully!');
 		}
 
 		return redirect()->back()->withErrors($validator->errors())->withInput()->with('error', 'Problem Updading product!');
