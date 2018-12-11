@@ -11,7 +11,7 @@
 					<div class="card-header">{{ __('New Category') }}</div>
 
 					<div class="card-body">
-						<form method="POST" action="{{ url('category/add') }}" enctype="multipart/form-data">
+						<form method="POST" action="{{ route('categories.add') }}" enctype="multipart/form-data">
 							@csrf
 
 							<div class="form-group row">
@@ -45,7 +45,7 @@
 							<div class="form-group row mb-0">
 								<div class="col-md-6 offset-md-4">
 									<button type="submit" class="btn btn-primary">
-										{{ __('Register') }}
+										{{ __('Save') }}
 									</button>
 								</div>
 							</div>

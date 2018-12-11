@@ -1,17 +1,20 @@
-<div class="popular-categories pt-5">
+<div class="popular-categories py-5">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 mb-5">
 				<div class="section-title">
-					<h2>Popular <span>Categories</span></h2>
+					<h2>{{ __('Popular ') }} <span>{{ __('Categories') }}</span></h2>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			@foreach($categories as $category)
-				<div class="col-6 col-md-3">
+				@if($loop->iteration > 4)
+					@break
+				@endif
+				<div class="col-6 col-md-3 mb-4">
 					<div class="category-banner">
-						<a href="#">
+						<a href="{{ route('shop', ['category' => $category->id]) }}">
 							<img src="/uploads/categories/{{ $category->image }}" class="img-fluid" alt="">
 						</a>
 					</div>

@@ -11,15 +11,14 @@ use Illuminate\Http\Request;
 class HomeController extends Controller {
 
 	public function __construct() {
-		$this->middleware('auth')->except('index');;
+		$this->middleware('auth')->except('index');
 	}
 
 	public function index() {
 
-		$categories = Category::select()->get();
-		$products   = Product::join('product_images', 'products.id', '=', 'product_images.product_id')->select()->get();
-		$user       = Auth::user();
+		$categories = Category::with('products')->orderBy('title', 'asc')->get();
+		$products   = Product::with('images')->get();
 
-		return view('home', compact('categories', 'products', 'user'));
+		return view('home', compact('categories', 'products'));
 	}
 }

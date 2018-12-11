@@ -1,9 +1,9 @@
 (function () {
 	'use strict';
 
-	const current = document.querySelector('#selected');
-	const thumbs  = document.querySelectorAll('.image-thumbs img');
-	const opacity = 0.5;
+	const current   = document.querySelector('#selected');
+	const thumbs    = document.querySelectorAll('.image-thumbs img');
+	const opacity   = 0.5;
 
 	thumbs[0].style.opacity = opacity;
 

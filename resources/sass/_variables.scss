@@ -1,4 +1,3 @@
-
 // Body
 $body-bg: #f8fafc;
 
@@ -11,17 +10,20 @@ $line-height-base: 1.6;
 $blue: #369599;
 $indigo: #6574cd;
 $purple: #9561e2;
-$pink: #f66D9b;
+$pink: #f66d9b;
 $red: #e3342f;
 $orange: #f6993f;
 $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
-$bg-color: #ffffff;
+$white: #ffffff;
 $bg-alt: #f8f8f8;
-$accent-1: #369599;
-$accent-1-dark: #2A6D71;
+$accent-1: #008a8a;
+$primary: $accent-1;
+$accent-1-dark: darken($accent-1, 15%) !default;
+$accent-2: #fdba5d;
+$accent-3: #f0534d;
 $black: #1e1e1e;
 $dark-grey: #333333;
-$medium-gray: #727272;
-$light-gray: #dddddd;
+$medium-grey: #727272;
+$light-grey: #dddddd;

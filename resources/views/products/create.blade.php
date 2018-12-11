@@ -52,7 +52,7 @@
 								<label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
 								<div class="col-md-6">
-									<textarea id="description" rows="4" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" value="{{ old('description') }}" required></textarea>
+									<textarea id="description" rows="4" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" required>{{ old('description') }}</textarea>
 
 									@if ($errors->has('description'))
 										<span class="invalid-feedback" role="alert">
