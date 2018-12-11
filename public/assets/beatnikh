@@ -1,0 +1,352 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:8889
+-- Generation Time: Dec 11, 2018 at 12:56 AM
+-- Server version: 5.7.23
+-- PHP Version: 7.2.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `beatnikh`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+	`id` int(10) UNSIGNED NOT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `created_at`, `updated_at`, `title`, `image`) VALUES
+	(5, '2018-12-02 05:54:29', '2018-12-11 05:54:34', 'Clothing', 'clothing.png'),
+	(6, '2018-12-02 05:55:57', '2018-12-10 06:35:25', 'Home Items', 'home-items.png'),
+	(7, '2018-12-02 05:57:03', '2018-12-10 06:35:39', 'Shoes', 'shoes.png'),
+	(8, '2018-12-02 05:57:39', '2018-12-10 06:35:48', 'Hats', 'hats.png'),
+	(9, '2018-12-02 06:04:38', '2018-12-10 06:35:59', 'Glasses', 'glasses.png'),
+	(10, '2018-12-02 06:04:56', '2018-12-10 07:11:07', 'Other Accessories', 'acessories.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `media`
+--
+
+CREATE TABLE `media` (
+	`id` int(10) UNSIGNED NOT NULL,
+	`model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`model_id` bigint(20) UNSIGNED NOT NULL,
+	`collection_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`file_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`mime_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`disk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`size` int(10) UNSIGNED NOT NULL,
+	`manipulations` json NOT NULL,
+	`custom_properties` json NOT NULL,
+	`responsive_images` json NOT NULL,
+	`order_column` int(10) UNSIGNED DEFAULT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+	`id` int(10) UNSIGNED NOT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`user_id` int(10) UNSIGNED NOT NULL,
+	`product_id` int(10) UNSIGNED NOT NULL,
+	`content` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `created_at`, `updated_at`, `user_id`, `product_id`, `content`) VALUES
+	(7, '2018-12-10 04:23:20', '2018-12-10 04:23:20', 1, 7, 'Awesome Product. Can you deliver?'),
+	(8, '2018-12-11 03:45:32', '2018-12-11 03:45:32', 6, 7, 'Sure! Contact me by email so we can set it up.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+	`id` int(10) UNSIGNED NOT NULL,
+	`migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+	(1, '2014_10_12_000000_create_users_table', 1),
+	(2, '2014_10_12_100000_create_password_resets_table', 1),
+	(3, '2018_11_23_001652_create_products_table', 1),
+	(4, '2018_11_23_001653_create_categories_table', 1),
+	(5, '2018_11_23_001653_create_messages_table', 1),
+	(6, '2018_11_23_001653_create_product_images_table', 1),
+	(7, '2018_11_23_001703_create_foreign_keys', 1),
+	(8, '2018_11_23_051629_create_media_table', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+	`email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+	('admin@admin.com', '$2y$10$ZIb8Z1vEJoxMeD/qBxbI6e5NfS8OB9med1hjNMaxFPmuMzKb1nQX2', '2018-12-11 05:41:03'),
+	('bjulliana@gmx.com', '$2y$10$4lsgUfiLk.g6x22hxEmZOONCDieAwRwOoND2qc87SabmOuLxoz4VC', '2018-12-11 05:41:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+	`id` int(10) UNSIGNED NOT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`deleted_at` timestamp NULL DEFAULT NULL,
+	`title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+	`price` decimal(9,2) NOT NULL,
+	`user_id` int(10) UNSIGNED NOT NULL,
+	`category_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `created_at`, `updated_at`, `deleted_at`, `title`, `description`, `price`, `user_id`, `category_id`) VALUES
+	(6, '2018-12-02 10:52:36', '2018-12-11 05:23:49', NULL, 'Velvet Plaid Blazer', 'Velvet Plaid Blazer\r\n\r\nSize: M', '65.00', 6, 5),
+	(7, '2018-12-02 10:53:57', '2018-12-02 10:53:57', NULL, 'Lethmik Hat', 'Lethmik Hat\r\nOnly Size\r\nBeige', '32.00', 6, 8),
+	(8, '2018-12-02 10:54:41', '2018-12-11 05:30:15', NULL, 'Woman Vintage Hat', 'Woman Vintage Hat\r\nOnly Size\r\nColor Dark Red', '38.00', 6, 5),
+	(9, '2018-12-02 10:55:39', '2018-12-02 10:57:03', NULL, 'New Balance Navy Sneaker', 'New Balance Navy Sneaker\r\nNavy and Indigo\r\nSize 8.5 Men', '120.00', 6, 7),
+	(10, '2018-12-02 10:56:29', '2018-12-02 10:56:29', NULL, 'Royal Susie Saddle Shoes', 'Royal Susie Saddle Shoes\r\nBlue and White\r\nSize 8.5 Men', '130.00', 6, 7),
+	(11, '2018-12-02 10:59:28', '2018-12-02 11:00:21', NULL, 'Old Clock', 'Old Wood Clock\r\nWorking\r\nWind-up Clock', '60.00', 6, 6),
+	(12, '2018-12-02 11:00:07', '2018-12-02 11:00:07', NULL, 'Polka Dots Vintage Dress', 'Polka Dots Vintage Dress\r\nBlack and Red\r\nSize M', '99.00', 6, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_images`
+--
+
+CREATE TABLE `product_images` (
+	`id` int(10) UNSIGNED NOT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`deleted_at` timestamp NULL DEFAULT NULL,
+	`product_id` int(10) UNSIGNED NOT NULL,
+	`file_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_images`
+--
+
+INSERT INTO `product_images` (`id`, `created_at`, `updated_at`, `deleted_at`, `product_id`, `file_name`) VALUES
+	(8, '2018-12-02 10:52:36', '2018-12-02 10:52:36', NULL, 6, '5c0373240f7c4.jpg'),
+	(9, '2018-12-02 10:53:57', '2018-12-02 10:53:57', NULL, 7, '5c037375179a4.jpg'),
+	(10, '2018-12-02 10:54:41', '2018-12-02 10:54:41', NULL, 8, '5c0373a1aba29.jpeg'),
+	(11, '2018-12-02 10:55:39', '2018-12-02 10:55:39', NULL, 9, '5c0373db84c18.jpg'),
+	(12, '2018-12-02 10:56:29', '2018-12-02 10:56:29', NULL, 10, '5c03740d431bf.jpg'),
+	(13, '2018-12-02 10:59:28', '2018-12-02 10:59:28', NULL, 11, '5c0374c021377.jpg'),
+	(14, '2018-12-02 11:00:07', '2018-12-02 11:00:07', NULL, 12, '5c0374e75c417.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+	`id` int(10) UNSIGNED NOT NULL,
+	`name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default-avatar.png',
+	`role` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default',
+	`email_verified_at` timestamp NULL DEFAULT NULL,
+	`password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `photo`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(1, 'Julliana Bica Bauer', 'admin', 'admin@admin.com', '1543460281.jpg', 'admin', NULL, '$2y$10$8UDzZcMQgr5SG28GKM6AmeeOjSX4szf74sO6MjLAlZFopoQe/cczy', 'T8MlqFcdOwpkS5iA20FNICFsqdaxregxT6DPa0CtrvKrmplA71yVhL123Wop', '2018-11-23 10:54:56', '2018-12-11 05:29:08'),
+	(5, 'newtest', 'newtest', 'default@default.com', '1543446307.jpg', 'default', NULL, '$2y$10$Sfb7PmnkdLVX2eqwljtoFO.aJopcdFfGe/KNL18icfyZjmB2/B.Pi', 'N4rieOu9ZPzfVsKTSkbObNFozUuSD1hiF6aYc8tx2PbvfMUQKb0mKSOoApTM', '2018-11-29 04:05:07', '2018-11-29 04:05:07'),
+	(6, 'Gary Knight', 'garyknight', 'gknight@mail.com', '1543710182.jpg', 'default', NULL, '$2y$10$si3EATi3kOcb5TaCJRyNROjRYpnKTWzF9cKgBPjCY3Z12fkDJ0QE2', 'GsvGXKZ1DJXtWplhTs1FuCCl9Yam8oIEG3SJxsMYlvdXZUQmqd30EMp9ImEh', '2018-12-02 05:23:02', '2018-12-11 05:21:57'),
+	(7, 'Julliana Bica Bauer', 'bjulliana', 'bjulliana@gmx.com', '1544488897.jpg', 'default', NULL, '$2y$10$8bnS2N7SVRBcCQlhPaioheq5in4laKI2yMPKAthWSWEAm53SdYANy', 'SkLXVp5ZS6O7FsBU1RSAHZTNJwRsKj5XgoCUqhLH732ntEs8syv4BNzhZMve', '2018-12-11 05:41:38', '2018-12-11 05:41:38');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+	ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `media`
+--
+ALTER TABLE `media`
+	ADD PRIMARY KEY (`id`),
+	ADD KEY `media_model_type_model_id_index` (`model_type`,`model_id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+	ADD PRIMARY KEY (`id`),
+	ADD KEY `messages_user_id_foreign` (`user_id`),
+	ADD KEY `messages_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+	ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+	ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+	ADD PRIMARY KEY (`id`),
+	ADD KEY `products_user_id_foreign` (`user_id`),
+	ADD KEY `products_category_id_foreign` (`category_id`);
+
+--
+-- Indexes for table `product_images`
+--
+ALTER TABLE `product_images`
+	ADD PRIMARY KEY (`id`),
+	ADD KEY `product_images_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+	ADD PRIMARY KEY (`id`),
+	ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+	MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `media`
+--
+ALTER TABLE `media`
+	MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+	MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+	MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+	MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `product_images`
+--
+ALTER TABLE `product_images`
+	MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+	MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+	ADD CONSTRAINT `messages_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `messages_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+	ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	ADD CONSTRAINT `products_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `product_images`
+--
+ALTER TABLE `product_images`
+	ADD CONSTRAINT `product_images_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
